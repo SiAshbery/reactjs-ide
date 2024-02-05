@@ -2,10 +2,29 @@ import { FileNode, DefaultFile } from "./types"
 
 const fileNameRegex = /\w+\.\w+/
 
+const consolidateChildren = (currentChildren: string[] = [], newChildren: string[] = []): string[] => {
+    return [...currentChildren, ...newChildren].filter((item, i, ar) => ar.indexOf(item) === i);
+}
+
 const unique = (array: FileNode[]): FileNode[] => {
-    return Array.from(new Map(array.map((item) =>
-        [item.name, item]
-    )).values())
+    const uniqueArray: FileNode[] = []
+
+    array.forEach((fileNode: FileNode) => {
+        const processedNode = getFileNodeByName(uniqueArray, fileNode.name);
+        if (processedNode) {
+            processedNode.children = consolidateChildren(processedNode.children, fileNode.children)
+        } else {
+            uniqueArray.push(fileNode)
+        }
+    })
+
+    return uniqueArray
+}
+
+const getFileNodeByName = (array: FileNode[], name: string): FileNode => {
+    return array.find((fileNode: FileNode) => {
+        return fileNode.name === name
+    })
 }
 
 export const parseNodes = (defaultFiles: DefaultFile[]): FileNode[] => {
@@ -18,15 +37,12 @@ export const parseNodes = (defaultFiles: DefaultFile[]): FileNode[] => {
                 return {
                     name: nodeName,
                     contents: file.contents,
-                    parent: nodeNames[index - 1]
                 }
             }
             return {
                 name: nodeName,
-                // an index of 0 would be the root folder so doesn't have a parent
-                parent: index > 0 ? nodeNames[index - 1] : null
+                children: [nodeNames[index + 1]]
             }
         })
     }).flat()))
-
 }

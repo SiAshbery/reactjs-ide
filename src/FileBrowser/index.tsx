@@ -4,11 +4,13 @@ import { FileNode } from '../types';
 import defaultFiles from '../defaultFiles';
 import { parseNodes } from '../helpers';
 
+import BrowserItem from './BrowserItem';
+
 const FileBrowser = () => {
   return <ul data-testid="file-browser"> {
     parseNodes(defaultFiles).map((file: FileNode) => {
       return (
-        <li key={file.name}>{file.name}</li>
+        <BrowserItem key={file.name} file={file} />
       )
     })
   }</ul>;
