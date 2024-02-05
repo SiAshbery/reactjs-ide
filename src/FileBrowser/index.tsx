@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileNode } from '../types';
+import FileNode from '../FileNode';
 
 import defaultFiles from '../defaultFiles';
 import { parseNodes } from '../helpers';

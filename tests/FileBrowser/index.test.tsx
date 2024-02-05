@@ -23,17 +23,6 @@ describe(FileBrowser, () => {
         const items = within(fileBrowserElement).getAllByRole('listitem').map(item => item.textContent)
         expect(items).toEqual([
             "app",
-            "src",
-            "App.tsx",
-            "data",
-            "featuredWidgets.js",
-            "discontinuedWidgets.js",
-            "style.css",
-            "clearanceWidgets.js",
-            "WidgetList",
-            "Widget.tsx",
-            "WidgetList.tsx",
-            "index.html",
         ])
     })
 

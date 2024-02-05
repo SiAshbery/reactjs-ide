@@ -1,4 +1,5 @@
-import { FileNode, DefaultFile } from "./types"
+import { DefaultFile } from "./types"
+import FileNode from "./FileNode";
 
 const fileNameRegex = /\w+\.\w+/
 
@@ -12,7 +13,7 @@ const unique = (array: FileNode[]): FileNode[] => {
     array.forEach((fileNode: FileNode) => {
         const processedNode = getFileNodeByName(uniqueArray, fileNode.name);
         if (processedNode) {
-            processedNode.children = consolidateChildren(processedNode.children, fileNode.children)
+            processedNode.childrenNames = consolidateChildren(processedNode.childrenNames, fileNode.childrenNames)
         } else {
             uniqueArray.push(fileNode)
         }
@@ -21,28 +22,47 @@ const unique = (array: FileNode[]): FileNode[] => {
     return uniqueArray
 }
 
-const getFileNodeByName = (array: FileNode[], name: string): FileNode => {
+export const getFileNodeByName = (array: FileNode[], name: string): FileNode => {
     return array.find((fileNode: FileNode) => {
         return fileNode.name === name
     })
 }
 
 export const parseNodes = (defaultFiles: DefaultFile[]): FileNode[] => {
-    return (unique(defaultFiles.map((file: DefaultFile) => {
+    const flatArray = unique(defaultFiles.map((file: DefaultFile) => {
         // keep a reference to the node names as we will need them to assign parents
         const nodeNames = file.path.split('/')
+
         return nodeNames.map((nodeName: string, index: number) => {
-            // if the nodeName matches the file name syntax it is a leaf and has contents
+            const newNode = new FileNode(nodeName, index === 0)
+
             if (nodeName.match(fileNameRegex)) {
-                return {
-                    name: nodeName,
-                    contents: file.contents,
-                }
+                // if the nodeName matches the file name syntax it is a file and has contents
+                newNode.contents = file.contents
+            } else {
+                // else the node is a folder and can contain children.
+                newNode.childrenNames.push(nodeNames[index + 1])
             }
-            return {
-                name: nodeName,
-                children: [nodeNames[index + 1]]
-            }
+            return newNode;
         })
-    }).flat()))
+    }).flat())
+
+    return nestChildren(flatArray)
+}
+
+const nestChildren = (flatArray) => {
+    // maps the childrenNames into FileNode children
+    flatArray.forEach((fileNode: FileNode) => {
+        fileNode.children = fileNode.childrenNames.map((childName: string) => {
+            return getFileNodeByName(flatArray, childName)
+        })
+    })
+    /*
+        Only root nodes should be represented at the top level
+        of this structure so we prune the rest as they are duplicates
+        and are now represented deeper in the branches
+    */
+    return flatArray.filter((fileNode: FileNode) => {
+        return fileNode.isRoot
+    })
 }
