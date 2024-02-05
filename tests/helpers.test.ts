@@ -18,8 +18,6 @@ const defaultFiles = [
 
 describe(parseNodes, () => {
     it('parses defaultFiles into an array of nested file nodes', () => {
-        console.log(JSON.stringify(parseNodes(defaultFiles), null, 4))
-
         expect(parseNodes(defaultFiles)).toEqual([
             {
                 "name": "root",
