@@ -10,7 +10,7 @@ const defaultFiles = [
         contents: 'content 2'
     },
     {
-        path: 'root/folde-2/file-3.js',
+        path: 'root/folder-2/file-3.js',
         contents: `content 3`
     },
 ]
@@ -23,7 +23,7 @@ describe(parseNodes, () => {
             { "name": "folder-1", "parent": "root" },
             { "contents": "content 1", "name": "file-1.js", "parent": "folder-1" },
             { "contents": "content 2", "name": "file-2.js", "parent": "folder-1" },
-            { "name": "folde-2", "parent": "root" },
+            { "name": "folder-2", "parent": "root" },
             { "contents": "content 3", "name": "file-3.js", "parent": "folde-2" }])
     })
 })
