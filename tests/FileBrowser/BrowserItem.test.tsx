@@ -15,9 +15,10 @@ describe(BrowserItem, () => {
     file.contents = "content"
     rootFile.children = [file]
     rootFile.childrenNames = [file.name]
+    const mockSetCurrentFile = jest.fn(() => { })
 
     beforeEach(() => {
-        render(<BrowserItem file={rootFile} setCurrentFile={() => { }} />);
+        render(<BrowserItem file={rootFile} setCurrentFile={mockSetCurrentFile} />);
         browserItemElement = screen.getByTestId('browser-item');
     })
 

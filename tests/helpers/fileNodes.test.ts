@@ -1,28 +1,6 @@
-import { parseNodes } from '../src/helpers'
+import { parseNodes, getFileNodeByName } from '../../src/Helpers/fileNodes'
 
-const defaultFiles = [
-    {
-        path: 'root/folder-1/file-1.js',
-        contents: 'content 1'
-    },
-    {
-        path: 'root/folder-1/file-2.js',
-        contents: 'content 2'
-    },
-    {
-        path: 'root/folder-2/file-3.js',
-        contents: `content 3`
-    },
-    {
-        path: 'root/b.js',
-        contents: `content 4`
-    },
-    {
-        path: 'root/a.js',
-        contents: `content 4`
-    }
-]
-
+import defaultFiles from '../Fixtures/defaultFiles'
 
 describe(parseNodes, () => {
     it('parses defaultFiles into an array of nested file nodes', () => {
@@ -106,5 +84,17 @@ describe(parseNodes, () => {
 
     it('only has unique nodes with no repeating names', () => {
         expect(parseNodes(defaultFiles).filter(node => node.name === 'root').length).toEqual(1)
+    })
+})
+
+describe(getFileNodeByName, () => {
+    const fileNodes = parseNodes(defaultFiles);
+    it('returns the right file node', () => {
+        expect(getFileNodeByName(fileNodes, 'root')).toEqual(fileNodes[0])
+    })
+
+    it('returns the right file node when nested', () => {
+        expect(getFileNodeByName(fileNodes, 'folder-1')).toEqual(fileNodes[0].children[0])
+        expect(getFileNodeByName(fileNodes, 'file-3.js')).toEqual(fileNodes[0].children[1].children[0])
     })
 })

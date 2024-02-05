@@ -1,5 +1,5 @@
-import { DefaultFile } from "./types"
-import FileNode from "./FileNode";
+import { DefaultFile } from "../types"
+import FileNode from "../FileNode";
 
 const fileNameRegex = /\w+\.\w+/
 
@@ -23,9 +23,22 @@ const unique = (array: FileNode[]): FileNode[] => {
 }
 
 export const getFileNodeByName = (array: FileNode[], name: string): FileNode => {
-    return array.find((fileNode: FileNode) => {
-        return fileNode.name === name
-    })
+    let toReturn: FileNode;
+    for (let index = 0; index < array.length; index++) {
+        const file = array[index];
+
+        if (file.name === name) {
+            toReturn = file
+            break;
+        }
+
+        toReturn = getFileNodeByName(file.children, name);
+        if (toReturn) {
+            break;
+        }
+    }
+
+    return toReturn
 }
 
 export const parseNodes = (defaultFiles: DefaultFile[]): FileNode[] => {

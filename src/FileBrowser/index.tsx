@@ -1,14 +1,11 @@
 import React from 'react';
 import FileNode from '../FileNode';
 
-import defaultFiles from '../defaultFiles';
-import { parseNodes } from '../helpers';
-
 import BrowserItem from './BrowserItem';
 
-const FileBrowser = ({ setCurrentFile }: { setCurrentFile: Function }) => {
+const FileBrowser = ({ setCurrentFile, files }: { setCurrentFile: Function, files: FileNode[] }) => {
   return <ul data-testid="file-browser"> {
-    parseNodes(defaultFiles).map((file: FileNode) => {
+    files.map((file: FileNode) => {
       return (
         <BrowserItem key={file.name} file={file} setCurrentFile={setCurrentFile}/>
       )
