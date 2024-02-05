@@ -26,4 +26,8 @@ describe(parseNodes, () => {
             { "name": "folder-2", "parent": "root" },
             { "contents": "content 3", "name": "file-3.js", "parent": "folder-2" }])
     })
+
+    it('only has unique nodes with no repeating names', () => {
+        expect(parseNodes(defaultFiles).filter(node => node.name === 'root').length).toEqual(1)
+    })
 })
