@@ -24,6 +24,6 @@ describe(parseNodes, () => {
             { "contents": "content 1", "name": "file-1.js", "parent": "folder-1" },
             { "contents": "content 2", "name": "file-2.js", "parent": "folder-1" },
             { "name": "folder-2", "parent": "root" },
-            { "contents": "content 3", "name": "file-3.js", "parent": "folde-2" }])
+            { "contents": "content 3", "name": "file-3.js", "parent": "folder-2" }])
     })
 })

@@ -4,8 +4,8 @@ import { FileNode } from '../types';
 import defaultFiles from '../defaultFiles';
 import { parseNodes } from '../helpers';
 
-const Workspace = () => {
-  return <ul data-testid="workspace"> {
+const FileBrowser = () => {
+  return <ul data-testid="file-browser"> {
     parseNodes(defaultFiles).map((file: FileNode) => {
       return (
         <li key={file.name}>{file.name}</li>
@@ -14,5 +14,4 @@ const Workspace = () => {
   }</ul>;
 };
 
-
-export default Workspace;
+export default FileBrowser

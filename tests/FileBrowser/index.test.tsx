@@ -4,23 +4,23 @@
 
 import React from "react";
 import { render, screen, within } from "@testing-library/react"
-import Workspace  from '../../src/Workspace/Workspace'
+import FileBrowser from '../../src/FileBrowser'
 import '@testing-library/jest-dom';
 
-describe(Workspace, () => {
-    let workSpaceElement
+describe(FileBrowser, () => {
+    let fileBrowserElement
 
     beforeEach(() => {
-        render(<Workspace />);
-        workSpaceElement = screen.getByTestId('workspace');
+        render(<FileBrowser />);
+        fileBrowserElement = screen.getByTestId('file-browser');
     })
 
     it('renders', () => {
-        expect(workSpaceElement).toBeInTheDocument();
+        expect(fileBrowserElement).toBeInTheDocument();
     })
 
     it('contains the correct list items', () => {
-        const items = within(workSpaceElement).getAllByRole('listitem').map(item => item.textContent)
+        const items = within(fileBrowserElement).getAllByRole('listitem').map(item => item.textContent)
         expect(items).toEqual([
             "app",
             "src",
