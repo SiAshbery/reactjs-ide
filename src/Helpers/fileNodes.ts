@@ -1,7 +1,11 @@
 import { DefaultFile } from "../types"
 import FileNode from "../FileNode";
 
-const fileNameRegex = /\w+\.\w+/
+const fileNameRegex = /\w+\.(\w+)/
+
+export const getFileExtension = (fileName: string): string => {
+    return fileName.match(fileNameRegex) ? fileName.match(fileNameRegex)[1] : ''
+}
 
 const consolidateChildren = (currentChildren: string[] = [], newChildren: string[] = []): string[] => {
     return [...currentChildren, ...newChildren].filter((item, i, ar) => ar.indexOf(item) === i);
@@ -63,11 +67,13 @@ export const parseNodes = (defaultFiles: DefaultFile[]): FileNode[] => {
     return nestChildren(flatArray)
 }
 
+const caseInsensitive = (a, b) => a.localeCompare(b, 'en', { 'sensitivity': 'base' })
+
 const sortChildren = (childrenNames: string[]): string[] => {
     //folders are places first, then files. Both are alphabetised respectively
     return [
-        ...childrenNames.filter((name: string) => !name.match(fileNameRegex)).sort(),
-        ...childrenNames.filter((name: string) => name.match(fileNameRegex)).sort()
+        ...childrenNames.filter((name: string) => !name.match(fileNameRegex)).sort(caseInsensitive),
+        ...childrenNames.filter((name: string) => name.match(fileNameRegex)).sort(caseInsensitive)
     ]
 }
 

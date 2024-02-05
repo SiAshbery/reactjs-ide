@@ -11,12 +11,12 @@ import defaultFiles from '../Fixtures/defaultFiles'
 
 describe(FileBrowser, () => {
     let fileBrowserElement
-    const mockSetCurrentFile = jest.fn(() => { })
+    const mockSetCurrentFileName = jest.fn(() => { })
     const fileNodes = parseNodes(defaultFiles)
 
 
     beforeEach(() => {
-        render(<FileBrowser setCurrentFile={mockSetCurrentFile} files={fileNodes} />);
+        render(<FileBrowser setCurrentFileName={mockSetCurrentFileName} files={fileNodes} />);
         fileBrowserElement = screen.getByTestId('file-browser');
     })
 

@@ -12,7 +12,7 @@ describe(File, () => {
 
     const mockOnClick = jest.fn(() => { });
     beforeEach(() => {
-        render(<File onClick={mockOnClick}>test</File>);
+        render(<File onClick={mockOnClick} name={"test.js"} />);
         fileElement = screen.getByTestId('file-button');
     })
 

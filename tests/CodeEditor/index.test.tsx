@@ -35,10 +35,10 @@ jest.mock("@monaco-editor/react", () => {
 describe(CodeEditor, () => {
     let codeEditorElement
     const currentFile = new FileNode('file.js', false)
-    const mockSetFiles = jest.fn(() => { })
+    const mockSaveFile = jest.fn(() => { })
 
     beforeEach(() => {
-        render(<CodeEditor currentFile={currentFile} setFiles={mockSetFiles} />);
+        render(<CodeEditor currentFile={currentFile} saveFile={mockSaveFile} />);
         codeEditorElement = screen.getByTestId('code-editor');
     })
 
@@ -50,7 +50,7 @@ describe(CodeEditor, () => {
         fireEvent.change(codeEditorElement, {
             target: { value: "a" }
         });
-        expect(mockSetFiles.mock.calls).toHaveLength(1);
+        expect(mockSaveFile.mock.calls).toHaveLength(1);
         expect(codeEditorElement.value).toEqual('a')
     })
 })

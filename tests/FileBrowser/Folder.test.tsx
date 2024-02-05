@@ -12,7 +12,7 @@ describe(Folder, () => {
 
     const mockOnClick = jest.fn(() => { });
     beforeEach(() => {
-        render(<Folder onClick={mockOnClick}>test</Folder>);
+        render(<Folder onClick={mockOnClick} isOpen={false}>test</Folder>);
         folderElement = screen.getByTestId('folder-button');
     })
 

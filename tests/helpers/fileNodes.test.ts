@@ -1,4 +1,4 @@
-import { parseNodes, getFileNodeByName } from '../../src/Helpers/fileNodes'
+import { parseNodes, getFileNodeByName, getFileExtension } from '../../src/Helpers/fileNodes'
 
 import defaultFiles from '../Fixtures/defaultFiles'
 
@@ -96,5 +96,15 @@ describe(getFileNodeByName, () => {
     it('returns the right file node when nested', () => {
         expect(getFileNodeByName(fileNodes, 'folder-1')).toEqual(fileNodes[0].children[0])
         expect(getFileNodeByName(fileNodes, 'file-3.js')).toEqual(fileNodes[0].children[1].children[0])
+    })
+})
+
+describe(getFileExtension, () => {
+    it('returns the file extension when one is present', () => {
+        expect(getFileExtension('test.js')).toEqual('js')
+    })
+
+    it('returns an empty string when a filename is not present', () => {
+        expect(getFileExtension('test')).toEqual('')
     })
 })

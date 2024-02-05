@@ -1,11 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
+import FileNode from '../FileNode';
+import BrowserItem from './BrowserItem';
+import styled from 'styled-components';
 
-const Folder = ({ onClick, children }: { onClick: React.MouseEventHandler<HTMLButtonElement>, children: React.ReactNode }) => {
+const FileBrowser = ({ setCurrentFileName, files }: { setCurrentFileName: Function, files: FileNode[] }) => {
+  return (
+    <List data-testid="file-browser">
+      {
+        files.map((file: FileNode) => {
+          return (
+            <BrowserItem key={file.name} file={file} setCurrentFileName={setCurrentFileName} />
+          )
+        })
+      }
+    </List>
 
-    return (
-        <button data-testid="folder-button" onClick={onClick}>{children}</button>
-    )
 
+  );
 };
 
-export default Folder
+export default FileBrowser
+
+const List = styled.ul`
+  width: 200px;
+  padding: 20px 24px;
+  margin: 0;
+`
