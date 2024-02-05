@@ -4,7 +4,7 @@
 
 import React from "react";
 import { render, screen, within } from "@testing-library/react"
-import { Workspace } from '../../src/Workspace/Workspace'
+import Workspace  from '../../src/Workspace/Workspace'
 import '@testing-library/jest-dom';
 
 describe(Workspace, () => {
@@ -22,14 +22,18 @@ describe(Workspace, () => {
     it('contains the correct list items', () => {
         const items = within(workSpaceElement).getAllByRole('listitem').map(item => item.textContent)
         expect(items).toEqual([
-            'App.tsx',
-            'featuredWidgets.js',
-            'discontinuedWidgets.js',
-            'style.css',
-            'clearanceWidgets.js',
-            'Widget.tsx',
-            'WidgetList.tsx',
-            'index.html'
+            "app",
+            "src",
+            "App.tsx",
+            "data",
+            "featuredWidgets.js",
+            "discontinuedWidgets.js",
+            "style.css",
+            "clearanceWidgets.js",
+            "WidgetList",
+            "Widget.tsx",
+            "WidgetList.tsx",
+            "index.html",
         ])
     })
 

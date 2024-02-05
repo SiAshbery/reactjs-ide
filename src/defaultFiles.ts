@@ -1,7 +1,4 @@
-export type DefaultFile = {
-  path: string,
-  contents: string
-}
+import { DefaultFile } from "./types";
 
 export default [
   {
