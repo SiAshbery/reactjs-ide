@@ -8,6 +8,7 @@ export const FileIcons = {
     css: cssIcon,
     html: htmlIcon,
     js: jsIcon,
+    jsx: jsIcon,
     ts: tsIcon,
     tsx: tsIcon
 }
