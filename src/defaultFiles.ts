@@ -1,4 +1,4 @@
-import { DefaultFile } from "./types";
+import { DefaultFile } from "./types/DefaultFile";
 
 export default [
   {

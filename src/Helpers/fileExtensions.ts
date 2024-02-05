@@ -1,8 +1,8 @@
 // images
-const cssIcon = '/src/assets/css.png'
-const htmlIcon = '/src/assets/html.png'
-const jsIcon = '/src/assets/js.png'
-const tsIcon = '/src/assets/ts.png'
+import cssIcon from '../assets/css.png'
+import htmlIcon from '../assets/html.png'
+import jsIcon from '../assets/js.png'
+import tsIcon from '../assets/ts.png'
 
 export const FileIcons = {
     css: cssIcon,

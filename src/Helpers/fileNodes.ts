@@ -1,4 +1,4 @@
-import { DefaultFile } from "../types"
+import { DefaultFile } from "../types/DefaultFile"
 import FileNode from "../FileNode";
 
 const fileNameRegex = /\w+\.(\w+)/
