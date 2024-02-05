@@ -9,9 +9,11 @@ import '@testing-library/jest-dom';
 
 describe(FileBrowser, () => {
     let fileBrowserElement
+    const mockSetCurrentFile = jest.fn(() => { })
+
 
     beforeEach(() => {
-        render(<FileBrowser />);
+        render(<FileBrowser setCurrentFile={mockSetCurrentFile} />);
         fileBrowserElement = screen.getByTestId('file-browser');
     })
 

@@ -6,11 +6,11 @@ import { parseNodes } from '../helpers';
 
 import BrowserItem from './BrowserItem';
 
-const FileBrowser = () => {
+const FileBrowser = ({ setCurrentFile }: { setCurrentFile: Function }) => {
   return <ul data-testid="file-browser"> {
     parseNodes(defaultFiles).map((file: FileNode) => {
       return (
-        <BrowserItem key={file.name} file={file} />
+        <BrowserItem key={file.name} file={file} setCurrentFile={setCurrentFile}/>
       )
     })
   }</ul>;
