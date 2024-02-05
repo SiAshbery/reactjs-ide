@@ -21,11 +21,11 @@ describe(BrowserItem, () => {
         expect(browserItemElement).toBeInTheDocument();
     })
 
-    // it('contains the correct list items', () => {
-    //     const items = within(browserItemElement).getAllByRole('listitem').map(item => item.textContent)
-    //     expect(items).toEqual([
-    //         "root",
-    //     ])
-    // })
+    it('contains the correct list items', () => {
+        const item = within(browserItemElement).getByRole('button').textContent
+        expect(item).toEqual(
+            "root",
+        )
+    })
 
 })
