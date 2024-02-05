@@ -13,6 +13,14 @@ const defaultFiles = [
         path: 'root/folder-2/file-3.js',
         contents: `content 3`
     },
+    {
+        path: 'root/b.js',
+        contents: `content 4`
+    },
+    {
+        path: 'root/a.js',
+        contents: `content 4`
+    }
 ]
 
 
@@ -62,11 +70,35 @@ describe(parseNodes, () => {
                         "childrenNames": [
                             "file-3.js"
                         ]
+                    },
+                    {
+                        "name": "a.js",
+                        "isRoot": false,
+                        "children": [
+
+                        ],
+                        "childrenNames": [
+
+                        ],
+                        "contents": "content 4"
+                    },
+                    {
+                        "name": "b.js",
+                        "isRoot": false,
+                        "children": [
+
+                        ],
+                        "childrenNames": [
+
+                        ],
+                        "contents": "content 4"
                     }
                 ],
                 "childrenNames": [
                     "folder-1",
-                    "folder-2"
+                    "folder-2",
+                    "b.js",
+                    "a.js",
                 ]
             }
         ])

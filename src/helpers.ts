@@ -50,10 +50,18 @@ export const parseNodes = (defaultFiles: DefaultFile[]): FileNode[] => {
     return nestChildren(flatArray)
 }
 
-const nestChildren = (flatArray) => {
+const sortChildren = (childrenNames: string[]): string[] => {
+    //folders are places first, then files. Both are alphabetised respectively
+    return [
+        ...childrenNames.filter((name: string) => !name.match(fileNameRegex)).sort(),
+        ...childrenNames.filter((name: string) => name.match(fileNameRegex)).sort()
+    ]
+}
+
+const nestChildren = (flatArray: FileNode[]): FileNode[] => {
     // maps the childrenNames into FileNode children
     flatArray.forEach((fileNode: FileNode) => {
-        fileNode.children = fileNode.childrenNames.map((childName: string) => {
+        fileNode.children = sortChildren(fileNode.childrenNames).map((childName: string) => {
             return getFileNodeByName(flatArray, childName)
         })
     })
